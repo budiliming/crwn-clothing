@@ -57,6 +57,15 @@ Redux :
     1. mapStateToProps
     2. mapDispatchToProps
 
-Two Types Selectors:
+Two Types Selectors: -> supaya tidak perlu rerender kalau component itu tidak ada perubahan
     1. Input Selectors.
     2. Output Selectors.
+
+6 Things javascript consider false:
+    1. 0
+    2. false
+    3. undefined
+    4. null
+    5. Nan
+    6. ""
+
