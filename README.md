@@ -69,3 +69,4 @@ Two Types Selectors: -> supaya tidak perlu rerender kalau component itu tidak ad
     5. Nan
     6. ""
 
+https://www.w3schools.com/charsets/ref_utf_dingbats.asp
