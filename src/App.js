@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -15,16 +15,17 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 //import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-const HatsPage = () => (
-  <div>
-    <h1>HATS PAGE</h1>
-  </div>
-)
+// const HatsPage = () => (
+//   <div>
+//     <h1>HATS PAGE</h1>
+//   </div>
+// )
 
-class App extends React.Component {
-  unSubscribeFromAuth = null
+const App = ({ checkUserSession, currentUser }) => {
+//class App extends React.Component {
+  //unSubscribeFromAuth = null
 
-  componentDidMount() {
+  //componentDidMount() {
 
     //const { setCurrentUser } = this.props;
 
@@ -52,15 +53,19 @@ class App extends React.Component {
     //     //addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
     //   }
     // })
-    const { checkUserSession } = this.props;
-    checkUserSession();
-  }
+    //const { checkUserSession } = this.props;
+  //   checkUserSession();
+  // }
 
-  componentWillUnmount() {
-    this.unSubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unSubscribeFromAuth();
+  // }
 
-  render() {
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession]);
+
+  //render() {
     return (
       <div>
         <Header />
@@ -71,11 +76,11 @@ class App extends React.Component {
           <Route exact path='/checkout' component={CheckOutPage} />
           {/* <Route path='/signIn' component={SignInAndSignUpPage} />
            */}
-           <Route exact path='/signIn' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+           <Route exact path='/signIn' render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
         </Switch>
       </div>
     );
-  }
+  //}
 }
 
 // const mapStateToProps = ({ user }) => ({

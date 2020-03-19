@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './sign-up.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -6,23 +6,33 @@ import CustomButton from '../custom-button/custom-button.component';
 import { signUpStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 
-class SignUp extends React.Component {
-    constructor() {
-        super();
+const SignUp = ({ signUpStart }) => {
+//class SignUp extends React.Component {
+    // constructor() {
+    //     super();
 
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        }
-    }
+    //     this.state = {
+    //         displayName: '',
+    //         email: '',
+    //         password: '',
+    //         confirmPassword: ''
+    //     }
+    // }
 
-    handleSubmit = async event => {
+    const [userCredentials, setUserCredentials] = useState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const { displayName, email, password, confirmPassword } = userCredentials;
+
+    const handleSubmit = async event => {
         event.preventDefault();
 
-        const { signUpStart } = this.props;
-        const { displayName, email, password, confirmPassword } = this.state;
+        //const { signUpStart } = this.props;
+        //const { displayName, email, password, confirmPassword } = this.state;
 
         if(password !== confirmPassword){
             alert("passwords don't match");
@@ -45,25 +55,26 @@ class SignUp extends React.Component {
         // }
     }
 
-    handleChange = event => {
+    const handleChange = event => {
         const { name , value } = event.target;
 
-        this.setState({ [name]: value });
+        //this.setState({ [name]: value });
+        setUserCredentials({ ...userCredentials,  [name]: value });
     }
 
-    render() {
-        const { displayName, email, password, confirmPassword } = this.state;
+    //render() {
+        //const { displayName, email, password, confirmPassword } = this.state;
 
         return (
             <div className='sign-up'>
                 <h2 className='title'>I do not have a account</h2>
                 <span>Sign Up with your email and password</span>
-                <form className='sign-up-form' onSubmit={this.handleSubmit}>
+                <form className='sign-up-form' onSubmit={handleSubmit}>
                     <FormInput 
                         type='text' 
                         name='displayName' 
                         value={displayName} 
-                        onChange={this.handleChange} 
+                        onChange={handleChange} 
                         label='Display Name' 
                         required/>
 
@@ -71,7 +82,7 @@ class SignUp extends React.Component {
                         type='email' 
                         name='email' 
                         value={email} 
-                        onChange={this.handleChange} 
+                        onChange={handleChange} 
                         label='Email' 
                         required/>
 
@@ -79,7 +90,7 @@ class SignUp extends React.Component {
                         type='password' 
                         name='password' 
                         value={password} 
-                        onChange={this.handleChange} 
+                        onChange={handleChange} 
                         label='Password' 
                         required/>
 
@@ -87,7 +98,7 @@ class SignUp extends React.Component {
                         type='password' 
                         name='confirmPassword' 
                         value={confirmPassword} 
-                        onChange={this.handleChange} 
+                        onChange={handleChange} 
                         label='Confirm Password' 
                         required/>
 
@@ -97,7 +108,7 @@ class SignUp extends React.Component {
                 </form>
             </div>
         )
-    }
+    //}
 }
 
 const mapDispatchToProps = dispatch => ({
